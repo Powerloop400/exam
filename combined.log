@@ -26,3 +26,5 @@
 {"level":"info","message":"GET /blogspage route succeeded."}
 {"level":"info","message":"Pagination: Page"}
 {"level":"info","message":"Number of blogs returned:"}
+{"level":"info","message":"This is an informational log."}
+{"level":"error","message":"This is an error log."}

@@ -145,7 +145,7 @@ blogRouter.get('/myblogs', (req, res) => {
     const page = req.query.page || 1; // Default to page 1
     const perPage = req.query.perPage || 20; // Default to 20 blogs per page
 
-    logger.info('GET /myblogs route accessed.');
+        logger.info('GET /myblogs route accessed.');
 
     Blog.paginate(
         { state: 'published', author: user.userId },
