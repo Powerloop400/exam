@@ -137,6 +137,7 @@ blogRouter.get('/blogspage', (req, res) => {
     );
 });
 
+//blogapp
 
 blogRouter.get('/myblogs', (req, res) => {
     const token = req.cookies.token;
