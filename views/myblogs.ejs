@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .blog-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .blog-description {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #777;
+        }
+
+         .publish-button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .publish-button:hover {
+            background-color: #0056b3;
+        }
+
+        .blog-body {
+            font-size: 16px;
+            margin-top: 20px;
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+        }
+
+        .read-more-link {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .blog-body-full {
+            display: none;
+        }
+
+
+        .reading-time {
+            font-size: 14px;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #fff;
+            margin-left: 20px;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Style for the buttons */
+.btn {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px; /* Add some spacing between buttons */
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex; 
+    align-items: center; 
+}
+
+.button-container a {
+    text-decoration: none; 
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">BlogsPage</a>
+            </div>
+            <div class="links">
+                <a href="/login">Login</a>
+                <a href="/create">Create Blog</a>
+                <a href="/drafts">Drafts</a>
+                                <a href="/myblogs">My Blogs</a>
+
+            </div>
+        </nav>
+    </header>
+    <h1>My Blogs</h1>
+    <p>These are all your blogs, whether publsihed or draft. you can either update or delete anyone</p>
+    <div id="blogList">
+        <% blogs.forEach(blog => { %>
+        <div class="blog-card">
+            <h2 class="blog-title"><%= blog.title %></h2>
+            <h3 class="blog-description"><%= blog.description %></h3>
+            <div class="blog-content">
+                <p class="blog-body">
+                    <%= blog.body.length <= 200 ? blog.body : blog.body.substring(0, 200) %>
+                </p>
+                <% if (blog.body.length > 200) { %>
+                    <p class="blog-body-full"><%= blog.body %></p>
+                    <a class="read-more-link" href="#">Read More</a>
+                <% } %>
+           </div>
+            <p class="reading-time">Reading Time: <%= blog.reading_time %></p>
+            <div class="button-container">
+                 <form action="/edit" method="POST">
+            <input type="hidden" name="blogId" value="<%= blog._id %>">
+            
+            <button type="submit" class="publish-button">Edit</button>
+        </form>
+            <form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST"> 
+                <button class="publish-button" type="submit">Delete</button>
+            </form>
+            </div>
+
+        </div>
+        
+        <% }); %>
+        
+    </div>
+    <script>
+        const readMoreLinks = document.querySelectorAll('.read-more-link');
+
+        readMoreLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const contentContainer = this.parentElement;
+                const fullContent = contentContainer.querySelector('.blog-body-full');
+                const shortContent = contentContainer.querySelector('.blog-body');
+                fullContent.style.display = 'block';
+                shortContent.style.display = 'none';
+                this.style.display = 'none';
+            });
+        });
+        
+    </script>
+</body>
+</html>
