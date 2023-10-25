@@ -21,6 +21,7 @@ authRouter.post(
           message: 'Signup successful',
           user: req.user
       });
+      res.redirect('/');
   }
 );
 
