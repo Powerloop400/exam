@@ -182,7 +182,7 @@ blogRouter.get('/drafts', authenticate, (req, res) => {
     logger.info('GET /drafts route accessed.');
 
     Blog.paginate(
-        { state: 'draft' },
+        { state: 'draft', author: req.user.userId },
         {
             page: page,
             limit: perPage,
