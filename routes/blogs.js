@@ -177,12 +177,13 @@ blogRouter.get('/myblogs', (req, res) => {
 blogRouter.get('/drafts', authenticate, (req, res) => {
     const page = req.query.page || 1; // Default to page 1
     const perPage = req.query.perPage || 20; // Default to 20 blogs per page
+    const { userId } = jwt.verify(token, secretkey);
 
     // Log that the '/drafts' route has been accessed
     logger.info('GET /drafts route accessed.');
 
     Blog.paginate(
-        { state: 'draft', author: req.user.userId },
+        { state: 'draft', author: userId },
         {
             page: page,
             limit: perPage,
