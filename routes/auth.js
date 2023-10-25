@@ -17,10 +17,7 @@ const passport = require('passport');
 authRouter.post(
   '/signup',
   passport.authenticate('signup', { session: false }), async (req, res, next) => {
-      res.json({
-          message: 'Signup successful',
-          user: req.user
-      });
+
       res.redirect('/');
   }
 );

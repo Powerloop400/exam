@@ -68,8 +68,12 @@
 <body>
     <form id="signupForm" action="/signup" method="post">
         <h1>Signup</h1>
-        <input type="text" name="first_name" placeholder="first name">
-        <input type="text" name="last_name" placeholder="last name">
+                <p>First name</p>
+
+        <input type="text" name="first_name" placeholder="first name" required>
+                <p>Last name</p>
+
+        <input type="text" name="last_name" placeholder="last name" required>
 
         <p>Email</p>
         <input type="email" name="email" placeholder="Email" required>
