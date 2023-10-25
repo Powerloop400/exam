@@ -140,14 +140,16 @@
             <form action="/<%= blog._id %>/publish?_method=PUT" method="POST">
                 <button class="publish-button" type="submit">Publish</button>
             </form>
-            <a href="/edit?blogid=<%= blog._id %>">
-                    <button >Edit</button>
-                </a>
+            <form action="/edit" method="POST">
+            <input type="hidden" name="blogId" value="<%= blog._id %>">
+            
+            <button type="submit" class="publish-button">Edit</button>
+        </form>
         </div>
         <% }); %>
     </div>
 
-
+            
     <script>
         const readMoreLinks = document.querySelectorAll('.read-more-link');
 
