@@ -18,7 +18,7 @@ authRouter.post(
   '/signup',
   passport.authenticate('signup', { session: false }), async (req, res, next) => {
 
-      res.redirect('/');
+      res.redirect('/login');
   }
 );
 
